@@ -6,11 +6,18 @@
 # Результат:
 # 40x⁹ - x⁸ -5x⁷ + 15x⁶ +5x⁴ + 5x³ + x² - 13x¹ + 53 = 0
 
-x = "23x⁹ - 16x⁸ + 3x⁷ + 15x⁴ - 2x³ + x² + 20 = 0"
-y = "17x⁹ + 15x⁸ - 8x⁷ + 15x⁶ - 10x⁴ + 7x³ - 13x¹ + 33 = 0"
+import codecs
+
+source1 = codecs.open(r'Task05source1.txt', 'r', "utf-8")
+x = source1.read()
+source1.close()
+
+source2 = codecs.open(r'Task05source2.txt', 'r', "utf-8")
+y = source2.read()
+source2.close()
 
 def equation_to_dict(x):
-    x = x.replace('⁰', "0").replace('¹', "1").replace('²', "2").replace('³', "3").replace('⁴', "4").replace('⁵', "5").replace('⁶', "6").replace('⁷', "7").replace('⁸',"8").replace('⁹', "9")
+    x = str(x).replace('⁰', "0").replace('¹', "1").replace('²', "2").replace('³', "3").replace('⁴', "4").replace('⁵', "5").replace('⁶', "6").replace('⁷', "7").replace('⁸',"8").replace('⁹', "9")
     list_x = x.replace("+ ", "").replace(" - ", " -").replace(" x", " 1x").replace(" = 0", "x0").split(" ")
     dict_x = {}
     for i in list_x:
@@ -44,3 +51,7 @@ def dict_to_equation(dict_x):
 z = dict_to_equation(dict_z)
 
 print(z)
+
+data = codecs.open(r'Task05result.txt', 'w', "utf-8")
+data.write(z)
+data.close()
