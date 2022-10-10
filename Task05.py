@@ -44,7 +44,7 @@ def dict_to_equation(dict_x):
         k = str(dict_x[i]) + 'x^' + str(i)
         list_x.append(k)
     x = ' + '.join(list_x) + " = 0"
-    x = x.replace('+ -',"-").replace(" -", " - ").replace("x^1", "x").replace("x^0", "")
+    x = x.replace('+ -',"-").replace(" -", " - ").replace("x^1", "x").replace("x^0", "").replace(" 1x", " x").replace("-1x", "-x")
     x = x.replace('^2', "²").replace('^3', "³").replace('^4', "⁴").replace('^5', "⁵").replace('^6', "⁶").replace('^7', "⁷").replace('^8',"⁸").replace('^9', "⁹")   
     return x
     
