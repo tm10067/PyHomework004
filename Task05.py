@@ -6,48 +6,41 @@
 # Результат:
 # 40x⁹ - x⁸ -5x⁷ + 15x⁶ +5x⁴ + 5x³ + x² - 13x¹ + 53 = 0
 
-def construct_equation():
-    from random import randint
-    k = int(input("введите степень уравнения: "))
-    eq = ''
-    for i in range(k, -1, -1):
-        c = randint(-100, 100)
-        if c > 1:
-            if i == k:
-                eq += str(c) + 'X^' + str(i)
-            else:
-                eq += ' + ' + str(c) + 'X^' + str(i)
-        elif c < -1: 
-            if i == k:
-                eq += '-' + str(abs(c)) + 'X^' + str(i)
-            else:
-                eq += ' - ' + str(abs(c)) + 'X^' + str(i)
-        elif c == 0:
-            continue
-    eq = eq + ' = 0'
-    return eq
+x = "23x⁹ - 16x⁸ + 3x⁷ + 15x⁴ - 2x³ + x² + 20 = 0"
+y = "17x⁹ + 15x⁸ - 8x⁷ + 15x⁶ - 10x⁴ + 7x³ - 13x¹ + 33 = 0"
 
-def construct_dict(eq):
-    eq_dict = {}
-    eq = eq.replace(' + ', ' +').replace(' - ', ' -').split()[:-2]
-    for i in range(len(eq)):
-        eq[i] = eq[i].replace('+', '').split("X^")
-        eq_dict[int(eq[i][1])] = int(eq[i][0])
-    return eq_dict
+def equation_to_dict(x):
+    x = x.replace('⁰', "0").replace('¹', "1").replace('²', "2").replace('³', "3").replace('⁴', "4").replace('⁵', "5").replace('⁶', "6").replace('⁷', "7").replace('⁸',"8").replace('⁹', "9")
+    list_x = x.replace("+ ", "").replace(" - ", " -").replace(" x", " 1x").replace(" = 0", "x0").split(" ")
+    dict_x = {}
+    for i in list_x:
+        dict_x[int(i.split("x")[1])] = int(i.split("x")[0])
+    return dict_x
 
-eq1 = construct_equation()
-eq_dict1 = construct_dict(eq1)
-print(eq1)
-print(eq_dict1)
-eq2 = construct_equation()
-eq_dict2 = construct_dict(eq2)
-print(eq2)
-print(eq_dict2)
+dict_x = equation_to_dict(x)
+dict_y = equation_to_dict(y)
 
-for j in range()
+def sum_dict_values (dict_x, dict_y):
+    list_z = (dict_x, dict_y)
+    dict_z = {}
+    for i in list_z:
+        for j in i.keys():
+            dict_z[j] = dict_z.get(j, 0) + i[j]
+    dict_z = dict(sorted(dict_z.items(), reverse = True))
+    return (dict_z)
+    
+dict_z = sum_dict_values(dict_x, dict_y)
 
+def dict_to_equation(dict_x):
+    list_x = []
+    for i in dict_x:
+        k = str(dict_x[i]) + 'x^' + str(i)
+        list_x.append(k)
+    x = ' + '.join(list_x) + " = 0"
+    x = x.replace('+ -',"-").replace(" -", " - ").replace("x^1", "x").replace("x^0", "")
+    x = x.replace('^2', "²").replace('^3', "³").replace('^4', "⁴").replace('^5', "⁵").replace('^6', "⁶").replace('^7', "⁷").replace('^8',"⁸").replace('^9', "⁹")   
+    return x
+    
+z = dict_to_equation(dict_z)
 
-
-# with open(r'Task04.txt', 'w') as data:
-#     data.write(construct_equation(N))
-#     data.close()
+print(z)
